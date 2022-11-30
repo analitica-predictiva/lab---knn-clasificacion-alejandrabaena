@@ -80,5 +80,5 @@ def pregunta_02():
 
     # Retorne la matriz de confusión
 
-    
+    print(confusion_matrix(y, y_pred))
     return confusion_matrix(y, y_pred)
