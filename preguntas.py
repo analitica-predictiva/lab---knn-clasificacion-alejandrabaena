@@ -5,6 +5,7 @@ Clasificación usando k-NN
 
 """
 import pandas as pd
+import numpy as np
 
 
 def pregunta_01():
@@ -60,14 +61,18 @@ def pregunta_02():
     from sklearn.preprocessing import OrdinalEncoder
 
     # Transforme las variables de entrada usando fit_transform
-    X = OrdinalEncoder().fit_transform(X)
+    #X = OrdinalEncoder().fit_transform(X)
+
+    OrdinalEncoder = OrdinalEncoder(categories="auto", dtype=np.float64,)
+    OrdinalEncoder.fit(X)
+    X = OrdinalEncoder.transform(X)
 
     # Importe KNeighborsClassifier de sklearn.neighbors
     from sklearn.neighbors import KNeighborsClassifier
     
 
     # Cree un un clasificador k-NN con 6 vecinos
-    knn = KNeighborsClassifier(n_neighbors=6)
+    knn = KNeighborsClassifier(n_neighbors=5)
 
     # Entrene el clasificador con el conjunto de entrenamiento
     knn.fit(X,y)
@@ -80,5 +85,4 @@ def pregunta_02():
 
     # Retorne la matriz de confusión
 
-    print(confusion_matrix(list(set(y, y_pred))))
-    return confusion_matrix(list(set(y, y_pred)))
+    return confusion_matrix(y, y_pred)
